@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets,status,generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializer import PatientSerializer,PatientRegistrationSerializer,UpdatePatientSerializer,PasswordUpdateSerializer
-from .models import PatientModel
+from .serializer import UpdateDoctorSerializer,DoctorSerializer,DoctorRegistrationSerializer,PasswordUpdateSerializer
+from .models import DoctorModel
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
@@ -13,29 +13,24 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.shortcuts import redirect
+
 # Create your views here.
 
+class DoctorView(viewsets.ModelViewSet):
+    queryset = DoctorModel.objects.all()
+    serializer_class = DoctorSerializer
 
-
-
-class PatientView(viewsets.ModelViewSet):
-    queryset = PatientModel.objects.all()
-    serializer_class = PatientSerializer
-
-
-
-
-class PatientRegisterView(APIView):
+class DoctorRegisterView(APIView):
     def post(self, request):
-        serializer = PatientRegistrationSerializer(data=request.data)
+        serializer = DoctorRegistrationSerializer(data=request.data)
         if serializer.is_valid():
-            patient = serializer.save()
-            user = patient.user  
+            doctor = serializer.save()
+            user = doctor.doctor  
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
-            confirm_link = f"http://127.0.0.1:8000/patient/active/{uid}/{token}"
-            email_subject = "Confirm Your acount"
-            email_body = render_to_string('confirm_email.html', {'confirm_link': confirm_link})
+            confirm_link = f"http://127.0.0.1:8000/doctor/active/{uid}/{token}"
+            email_subject = "Confirm Your Acount"
+            email_body = render_to_string('confirm_emails.html', {'confirm_link': confirm_link})
             
             email = EmailMultiAlternatives(email_subject, '', to=[user.email])
             email.attach_alternative(email_body, "text/html")
@@ -43,8 +38,6 @@ class PatientRegisterView(APIView):
             return Response({"message": "Check your mail for confirmation"}, status=200)
         return Response(serializer.errors, status=400)
     
-
-
 def activate(request, uid64, token):
     try: 
 
@@ -60,27 +53,10 @@ def activate(request, uid64, token):
         return redirect('login')
     else:
         return redirect('register')
-
-
-
-
-class PatientUpdateView(generics.UpdateAPIView):
-    queryset = PatientModel.objects.all()
-    serializer_class = UpdatePatientSerializer
+    
+class DoctorUpdateView(generics.UpdateAPIView):
+    queryset = DoctorModel.objects.all()
+    serializer_class = UpdateDoctorSerializer
     lookup_field = 'id'
 
 
-
-    
-class PasswordUpdateView(generics.UpdateAPIView):
-    queryset = User.objects.all()
-    serializer_class = PasswordUpdateSerializer
-
-    lookup_field = 'id' 
-
-    def update(self, request, *args, **kwargs):
-        user = self.get_object()
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.update(user,serializer.validated_data)
-        return Response({"detail": "Password updated successfully"}, status=status.HTTP_200_OK)

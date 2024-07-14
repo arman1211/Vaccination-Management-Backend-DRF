@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h8&z&@u8-312v0bwk*)9lq&9uuv_^ge#u!lf(%_prk@yjwp1d%'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,8 +36,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'sharfuddinarman512@gmail.com'
-EMAIL_HOST_PASSWORD = 'jhkxfnlvtfhcgysy'
+EMAIL_HOST_USER = env('EMAIL_HOST')
+EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
 
 
 # Application definition
@@ -51,6 +55,7 @@ INSTALLED_APPS = [
     'vaccine_campaign',
     'user',
     'corsheaders',
+    'doctor',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +72,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://*",
+    "http://*",
     # Add other origins if necessary
 ]
 CORS_ALLOW_ALL_ORIGINS = True

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 100%;
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        padding: 20px;
+      }
+      .header {
+        background-color: #f2f2f2;
+        color: #333333;
+        text-align: center;
+        padding: 20px;
+        border-bottom: 2px solid #e0e0e0;
+      }
+      .header img {
+        max-width: 100px;
+        margin-bottom: 10px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 34px;
+      }
+      .header p {
+        margin: 5px 0 0;
+        font-size: 26px;
+      }
+      .content {
+        padding: 20px;
+        line-height: 1.6;
+        color: #333333;
+      }
+      .content h2 {
+        color: #ff5733;
+        font-size: 20px;
+        margin-top: 0;
+      }
+      .content p {
+        margin: 10px 0;
+        font-size: 28px;
+      }
+      .table-container {
+        margin-top: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #e0e0e0;
+      }
+      th,
+      td {
+        padding: 5px;
+        text-align: left;
+        font-size: 16px;
+      }
+      th {
+        background-color: #ff5733;
+        color: #ffffff;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 14px;
+        color: #777777;
+        border-top: 2px solid #e0e0e0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Vaccine Dose Report</h1>
+      </div>
+      <div class="content">
+        <h2>Patient Information</h2>
+        <p><strong>Patient:</strong> {{ patient }}</p>
+        <p><strong>Vaccine:</strong> {{ vaccine }}</p>
+        <p><strong>First Dose Date:</strong> {{ first_dose_date }}</p>
+        <p><strong>Second Dose Date:</strong> {{ second_dose_date }}</p>
+        <p><strong>Status:</strong> {{ is_completed }}</p>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Vaccine</th>
+              <th>First Dose Date</th>
+              <th>Second Dose Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ patient }}</td>
+
+              <td>{{ vaccine }}</td>
+
+              <td>{{ first_dose_date }}</td>
+
+              <td>{{ second_dose_date }}</td>
+
+              <td>{{ is_completed }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="footer">
+        <p>&copy; 2024 Vaccination Management System. All rights reserved.</p>
+      </div>
+    </div>
+  </body>
+</html>

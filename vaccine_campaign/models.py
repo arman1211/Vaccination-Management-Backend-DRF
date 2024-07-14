@@ -1,7 +1,8 @@
 from django.db import models
 from datetime import timedelta
 from django.db import models
-from patient.models import DoctorModel ,PatientModel
+from patient.models import PatientModel
+from doctor.models import DoctorModel
 
 class VaccineCampaignModel(models.Model):
     name = models.CharField(max_length=100)
@@ -18,13 +19,9 @@ class VaccineDoseBookingModel(models.Model):
     patient = models.ForeignKey(PatientModel,on_delete=models.CASCADE)
     first_dose_date = models.DateField()
     second_dose_date = models.DateField(blank=True,null=True)
+    is_completed = models.BooleanField(default=False)
 
-    def save(self, *args, **kwargs):
-        if not self.second_dose_date:
-            self.second_dose_date = self.first_dose_date + timedelta(days=30)
-        super().save(*args, **kwargs)
-    def __str__(self):
-        return f'{self.patient.user.username} - {self.vaccine.name}'
+    
 
 
 Rating = (
