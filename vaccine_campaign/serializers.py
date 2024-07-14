@@ -14,7 +14,7 @@ from django.shortcuts import redirect
 class VaccineCampaignSerializer(serializers.ModelSerializer):
     class Meta:
         model = VaccineCampaignModel
-        fields = ['id', 'name', 'description', 'start_date', 'end_date','created_by']
+        fields = ['id', 'name', 'description', 'start_date', 'end_date','created_by','image']
 
 class VaccineDoseBookingSerializer(serializers.ModelSerializer):
     vaccine = VaccineCampaignSerializer()
@@ -34,6 +34,7 @@ class VaccineDoseBookingSerializer(serializers.ModelSerializer):
         validated_data['second_dose_date'] = first_dose_date + timedelta(days=30)
         return super().create(validated_data)
     
+
 
     
 class VaccineDoseBookingCreateSerializer(serializers.ModelSerializer):

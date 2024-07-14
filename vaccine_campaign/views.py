@@ -79,6 +79,10 @@ class DeleteVaccineCampaignView(DestroyAPIView):
     queryset = VaccineCampaignModel.objects.all()
     lookup_field = 'id'
 
+class DeleteVaccineDoseBooking(DestroyAPIView):
+    queryset = VaccineDoseBookingModel.objects.all()
+    lookup_field = 'id'
+
 
 def render_to_pdf(template_src, context_dict={}):
     template = get_template(template_src)

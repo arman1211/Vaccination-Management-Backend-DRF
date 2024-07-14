@@ -5,6 +5,7 @@ from patient.models import PatientModel
 from doctor.models import DoctorModel
 
 class VaccineCampaignModel(models.Model):
+    image = models.ImageField(upload_to='vaccine_campaign/media/', default='media/vaccine-details.png')
     name = models.CharField(max_length=100)
     description = models.TextField()
     start_date = models.DateField()
