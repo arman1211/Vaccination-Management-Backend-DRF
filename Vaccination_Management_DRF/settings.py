@@ -30,6 +30,10 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['*','http://localhost:5173/']
+CSRF_TRUSTED_ORIGINS = [
+    'https://vaccination-management-backend-drf.onrender.com',
+    'https://*',
+]
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -80,10 +84,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://vaccination-management-backend-drf.onrender.com/',
-    'https://*',
-]
+
 ROOT_URLCONF = 'Vaccination_Management_DRF.urls'
 
 MEDIA_URL = '/media/'
