@@ -33,7 +33,7 @@ class PatientRegisterView(APIView):
             user = patient.user  
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
-            confirm_link = f"http://127.0.0.1:8000/patient/active/{uid}/{token}"
+            confirm_link = f"https://vaccination-management.netlify.app/patient/active/{uid}/{token}"
             email_subject = "Confirm Your acount"
             email_body = render_to_string('confirm_email.html', {'confirm_link': confirm_link})
             
@@ -59,7 +59,7 @@ def activate(request, uid64, token):
         user.save()
         return redirect('https://vaccination-management.netlify.app/login')
     else:
-        return redirect('register')
+        return redirect('https://vaccination-management.netlify.app/register')
 
 
 

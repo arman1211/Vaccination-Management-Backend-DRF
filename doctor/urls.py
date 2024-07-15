@@ -10,5 +10,5 @@ urlpatterns = [
     path('',include(router.urls)),
     path('register/', DoctorRegisterView.as_view(), name='patient-register'),
     path('active/<uid64>/<token>/', activate, name = 'activate'),
-     path('update-doctor/<int:id>', DoctorUpdateView.as_view(), name='update-doctor'),
+    path('update-doctor/<int:id>', DoctorUpdateView.as_view(), name='update-doctor'),
 ]
