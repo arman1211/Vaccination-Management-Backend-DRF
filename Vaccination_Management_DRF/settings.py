@@ -77,6 +77,13 @@ CORS_ALLOWED_ORIGINS = [
     # Add other origins if necessary
 ]
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://vaccination-management-backend-drf.onrender.com/',
+    'https://*',
+]
 ROOT_URLCONF = 'Vaccination_Management_DRF.urls'
 
 MEDIA_URL = '/media/'
