@@ -29,7 +29,7 @@ class VaccineDoseBookingViewSet(viewsets.ModelViewSet):
         serializer.save()
 
 class VaccineReviewViewSet(viewsets.ModelViewSet):
-    queryset = VaccineReviewModel.objects.all()
+    queryset = VaccineReviewModel.objects.all().order_by('-reviewd_at')[:4]
     serializer_class = VaccineReviewSerializer
 
     def perform_create(self, serializer):
