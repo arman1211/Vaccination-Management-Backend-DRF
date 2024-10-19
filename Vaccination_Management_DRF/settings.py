@@ -29,7 +29,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','http://localhost:5173/']
+ALLOWED_HOSTS = ['*','http://localhost:5173/','.vercel.app']
 CSRF_TRUSTED_ORIGINS = [
     'https://vaccination-management-backend-drf.onrender.com',
     'https://*',
@@ -47,6 +47,7 @@ EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,6 +65,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -91,8 +93,8 @@ MEDIA_URL = '/media/'
 
 # Path where media is stored'
 MEDIA_ROOT = BASE_DIR / ''
-
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -109,7 +111,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Vaccination_Management_DRF.wsgi.application'
+WSGI_APPLICATION = 'Vaccination_Management_DRF.wsgi.app'
 
 
 # Database
@@ -121,6 +123,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres.stdyalacexzqydvdqrdr',
+#         'PASSWORD': 'Supabase15795@',
+#         'HOST': 'aws-0-ap-southeast-1.pooler.supabase.com',
+#         'PORT': '6543'
+#     }
+# }
 
 
 # Password validation
