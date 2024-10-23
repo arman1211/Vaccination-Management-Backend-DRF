@@ -6,12 +6,12 @@ from xhtml2pdf import pisa
 from django.shortcuts import get_object_or_404
 from .models import VaccineDoseBookingModel
 from rest_framework import status
-from rest_framework.generics import RetrieveAPIView,UpdateAPIView,DestroyAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView,UpdateAPIView,DestroyAPIView
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import VaccineCampaignModel, VaccineDoseBookingModel,VaccineReviewModel
-from .serializers import VaccineDoseBookingCompletionSerializer, VaccineCampaignSerializer,VaccineDoseBookingSerializer,VaccineReviewSerializer,VaccineDoseBookingCreateSerializer,VaccineReviewPostSerializer
+from .serializers import VaccineDoseBookingByPatientSerializer, VaccineDoseBookingCompletionSerializer, VaccineCampaignSerializer,VaccineDoseBookingSerializer,VaccineReviewSerializer,VaccineDoseBookingCreateSerializer,VaccineReviewPostSerializer
 # Create your views here.
 class VaccineCampaignViewSet(viewsets.ModelViewSet):
     queryset = VaccineCampaignModel.objects.all()
@@ -27,6 +27,13 @@ class VaccineDoseBookingViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save()
+
+class VaccineDoseBookingByPatient(ListAPIView):
+    serializer_class = VaccineDoseBookingByPatientSerializer
+
+    def get_queryset(self):
+        patient_id = self.kwargs['patient_id']  
+        return VaccineDoseBookingModel.objects.filter(patient_id=patient_id)
 
 class VaccineReviewViewSet(viewsets.ModelViewSet):
     queryset = VaccineReviewModel.objects.all().order_by('-reviewd_at')[:4]

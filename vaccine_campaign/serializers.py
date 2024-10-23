@@ -34,7 +34,10 @@ class VaccineDoseBookingSerializer(serializers.ModelSerializer):
         validated_data['second_dose_date'] = first_dose_date + timedelta(days=30)
         return super().create(validated_data)
     
-
+class VaccineDoseBookingByPatientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=VaccineDoseBookingModel
+        fields = '__all__'
 
     
 class VaccineDoseBookingCreateSerializer(serializers.ModelSerializer):
