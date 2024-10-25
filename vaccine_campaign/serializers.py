@@ -33,11 +33,20 @@ class VaccineDoseBookingSerializer(serializers.ModelSerializer):
         first_dose_date = validated_data.get('first_dose_date')
         validated_data['second_dose_date'] = first_dose_date + timedelta(days=30)
         return super().create(validated_data)
+
+class VaccineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VaccineCampaignModel  # Replace with your actual Vaccine model name
+        fields = '__all__'
     
 class VaccineDoseBookingByPatientSerializer(serializers.ModelSerializer):
+    vaccine = VaccineSerializer()
+
     class Meta:
-        model=VaccineDoseBookingModel
-        fields = '__all__'
+        model = VaccineDoseBookingModel
+        fields = ['id', 'first_dose_date', 'second_dose_date', 'is_completed', 'vaccine']
+
+    
 
     
 class VaccineDoseBookingCreateSerializer(serializers.ModelSerializer):
