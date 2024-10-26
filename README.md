@@ -28,8 +28,8 @@ This repository contains the backend of the VacciSure vaccination management sys
 
 1. **Clone the Repository**
     ```bash
-    git clone https://github.com/yourusername/vaccisure-backend.git
-    cd vaccisure-backend
+    git clone https://github.com/arman1211/Vaccination-Management-Backend-DRF.git
+    cd Vaccination-Management-Backend-DRF
     ```
 
 2. **Create and Activate a Virtual Environment**
