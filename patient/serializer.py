@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import PatientModel
+from .models import PatientModel,Payment
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -91,4 +91,9 @@ class PasswordUpdateSerializer(serializers.Serializer):
         instance.set_password(validated_data['new_password'])
         instance.save()
         return instance
+    
+class PaymentViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Payment
+        fields= '__all__'
     

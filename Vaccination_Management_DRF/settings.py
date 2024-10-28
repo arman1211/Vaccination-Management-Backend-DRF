@@ -155,6 +155,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -166,6 +174,17 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+
+
+# settings.py
+SSL_COMMERZ_STORE_ID = "arman671d3512a69d5"
+SSL_COMMERZ_STORE_PASSWORD = "arman671d3512a69d5@ssl"
+SSL_COMMERZ_API_URL = "https://sandbox.sslcommerz.com"  # Use live URL for production
+SSL_COMMERZ_SUCCESS_URL = "https://vaccination-management-backend-drf.vercel.app/patient/payment/success/"
+SSL_COMMERZ_FAIL_URL = "https://vaccination-management-backend-drf.vercel.app/patient/payment/fail/"
+SSL_COMMERZ_CANCEL_URL = "https://vaccination-management-backend-drf.vercel.app/patient/payment/cancel/"
 
 
 
